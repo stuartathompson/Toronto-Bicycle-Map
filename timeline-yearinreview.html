@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Timeline Wall</title>
+		<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />	
+		<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+		<link rel="stylesheet" type="text/css" media="screen" href="http://beta.images.theglobeandmail.com/bundle/2006392680/css/fonts.css" />
+
+		<script type="text/javascript">
+		
+			$(function(){
+/* -------------- JSON -------------- */
+var tiles = {
+"faces": [
+					{
+						"image": "1.jpg",
+						"tags": "national inspiring video",
+						"subhead": "Chris Hadfield, Canadian astronaut",
+						"title": "To fly and work on a space shuttle",
+						"date": "5/7/2011"
+					},
+					{
+						"image": "2.jpg",
+						"tags": "national tragedy",
+						"subhead": "Abigail Carter, with her husband died in 9/11",
+						"title": "To hear that Osama bin Laden was dead",
+						"text": "Abigail Carter’s husband, Arron, was killed in the 9/11 terrorist attacks on the World Trade Center. Ms. Carter grew up in Toronto and now lives in Seattle.</p>The news of Osama bin Laden’s death came during a Sunday night dinner party I was hosting with a couple of girlfriends. I reluctantly got up from the table when my 15-year-old daughter called me urgently from her room, where she sat on her bed with the computer on her lap. \”Osama’s been killed! And people are celebrating!\” Celebrating? I said, perplexed.</p><p>\”Yeah, isn’t that weird? I mean I know he killed daddy and all those people, but why would they celebrate a man’s death?\”</p><p>I don’t know sweetie, was all I had in response.</p><p>Downstairs, I told my friends the news, hoping that we could all just say \”good\” and carry on with our dinner. \”How do you feel?\” one friend asked. What could I tell them? The sun didn’t suddenly start shining. No trumpets sounded. My husband didn’t magically appear beside me.</p><p>I feel nothing, I told them. Osama bin Laden’s dead. I guess that’s a good thing. But Arron is still dead, so nothing had changed, at least for me. They nodded in understanding, but I’m not sure they really understood. Shouldn’t I be celebrating too? The man who was responsible for the death of my husband and countless others was dead. I’m glad he will never again cause another family’s devastation, but I’ve learned that fulfilled revenge does little to heal heartbreak. Heartbreak continues regardless.</p><p>Later, I learned the people celebrating Osama’s death in Washington D.C. were young students, and I realized they had probably lived their entire lives with an Osama boogeyman haunting their dreams. I could imagine their relief at the news of his death, though it wasn’t my relief. Boogeymen didn’t scare me anymore because my nightmare came true the day the buildings fell.</p><p>— As told to James Bradshaw</p>",
+						"date": "14/5/2011"
+					},
+					{
+						"image": "3.jpg",
+						"tags": "national tragedy",
+						"subhead": "Carolyn Cross",
+						"title": "To survive a fiery plane crash",
+						"date": "2/10/2011"
+					},
+					{
+						"image": "4.jpg",
+						"tags": "national politics",
+						"subhead": "Former Senate page Brigette DePape",
+						"title": "To be dragged off the Senate floor",
+						"date": "30/10/2011"
+					},
+					{
+						"image": "5.jpg",
+						"tags": "national science",
+						"subhead": "John Dick, stem cell researcher",
+						"title": "To have a scientific breakthrough",
+						"date": "28/10/2011"
+					},
+					{
+						"image": "6.jpg",
+						"tags": "national tragedy",
+						"subhead": "Rosaire Duval, resident of Richelieu Valley",
+						"title": "To canoe to work",
+						"category": "april",
+						"date": "15/4/2011"
+					},
+					{
+						"image": "7.jpg",
+						"tags": "national sports tragedy",
+						"subhead": "Rick Gilson, football coach",
+						"title": "To lose four team members in a car crash",
+						"date": "17/9/2011"
+					},
+					{
+						"image": "8.jpg",
+						"tags": "national crime",
+						"subhead": "Paul Hebert, father of Kienan Hebert",
+						"title": "To have your son kidnapped – and returned",
+						"date": "1/9/2011"
+					},
+					{
+						"image": "9.jpg",
+						"tags": "national inspiring political ",
+						"subhead": "Kalle Lasn, editor of Adbusters magazine",
+						"title": "To start a revolution with #ows",
+						"date": "20/6/2011"
+					},
+					{
+						"image": "10.jpg",
+						"tags": "national inspiring ",
+						"subhead": "Diamond Marshall, six years old",
+						"title": "To meet a princess",
+						"date": "10/7/2011"
+					},
+					{
+						"image": "11.jpg",
+						"tags": "national political ",
+						"subhead": "Anne McGrath",
+						"title": "To help craft Jack Layton's final letter",
+						"date": "11/8/2011"
+					},
+					{
+						"image": "12.jpg",
+						"tags": "national inspiring ",
+						"subhead": "Sergeant Bjarne Nielsen, war veteran",
+						"title": "To learn to walk again",
+						"date": "5/6/2011"
+					},
+					{
+						"image": "13.jpg",
+						"tags": "national political BC ",
+						"subhead": "Alison Redford, premier of Alberta",
+						"title": "To lose your mother and win an election",
+						"date": "8/9/2011"
+					},
+					{
+						"image": "14.jpg",
+						"tags": "world national political ",
+						"subhead": "Neolfer Pazira, award-winning filmmaker",
+						"title": "To see combat troops pulled from Kandahar",
+						"date": "7/12/2011"
+					},
+					{
+						"image": "15.jpg",
+						"tags": "world inspiring ",
+						"subhead": "Lisa Argilla, Wellington Zoo veterinarian",
+						"title": "To release a penguin back to the wild",
+						"date": "4/9/2011"
+					},
+					{
+						"image": "16.jpg",
+						"tags": "world inspiring political ",
+						"subhead": "Sarah al Haider",
+						"title": "To drive with a woman in Saudi Arabia",
+						"date": "6/9/2011"
+					},
+					{
+						"image": "17.jpg",
+						"tags": "world crime ",
+						"subhead": "Tom Latchem, the newspaper's ex-TV editor",
+						"title": "To lose your job at News of the World",
+						"date": "5/6/2011"
+					},
+					{
+						"image": "18.jpg",
+						"tags": "world tragedy ",
+						"subhead": "Kevin McCort, CEO of aid agency CARE Canada",
+						"title": "To eat a full meal in the midst of famine",
+						"date": "7/11/2011"
+					},
+					{
+						"image": "19.jpg",
+						"tags": "world inspiring ",
+						"subhead": "Ivan Garcia Pena, restaurant owner",
+						"title": "To open your own business in Cuba",
+						"date": "5/10/2012"
+					},
+					{
+						"image": "20.jpg",
+						"tags": "world tragedy ",
+						"subhead": "Dr. Peter Rhee, lead surgeon after she was shot",
+						"title": "To operate on Gabrielle Giffords",
+						"text": "<em>Here is the first-person account of the Jan. 8 events in Tucson, as they affected Dr. Peter Rhee, the lead surgeon on the team that operated on Gabrielle Giffords and other victims of the shooting.</em><p>The day was an ordinary day that started badly when my one rare day out of the hospital was ruined by more violence. The full gambit of emotions were felt by all in that one day. Frustration, followed by trained calm with excitement and adventure, sadness, worry, anger and happiness.</p><p>Frustrated at my one day off being ruined. Calm and excitement as training and experience took over as we manifested our disaster planning . Adventure during the crisis was mixed with sadness of telling loved ones what had just happened. Anger at the illogic of madmen with guns that are free to so easily kill. Happiness as we see the brighter side of humanity as they gathered to sympathize and support each other as well as those that were hurt.</p><p>The care was simple. We do that every day and unfortunately we are good at it because we do this all the time. What was going through my mind the first twenty four hours was what it was going to take to care for the casualties and their families and friends. This was work and sadly I know how to care for those injured. Trauma is the single largest cause of unnecessary death in the young. The surgeries was on Mrs. Giffords and the others were \"routine\". We do not alter our treatment based on the importance of a patient. It was not in the thoughts of all the trauma team members when they are pulling through for you. To see that team operating so well together is exhilarating as a leader. I am proud of our team and what it is capable of doing.</p><p>I obviously had no idea of the media attention that this would get but it was large, and I am astonished how respectful and professional the media has been covering this event. Always positive and so amendable. I am surprised and happy that my health care professionals, ranging from first responders to the neurosurgeons, have gotten credit for what the results have been after the stupid event of Jan 8.\"</p>",
+						"date": "6/1/2012"
+					},
+					{
+						"image": "21.jpg",
+						"tags": "world tragedy crime",
+						"subhead": "Trevor Reeves, fifth generation owner",
+						"title": "To watch rioters burn down your business",
+						"date": "2/8/2011"
+					},
+					{
+						"image": "22.jpg",
+						"tags": "world tragedy ",
+						"subhead": "Hiromaru and Nobuko Sasazaki, of Takata",
+						"title": "To lose everything in Japan's tsunami",
+						"date": "5/10/2011"
+					},
+					{
+						"image": "23.jpg",
+						"tags": "world inspiring ",
+						"subhead": "Former Ont. governor-general Hilary Weston",
+						"title": "To attend a royal wedding",
+						"date": "9/4/2012"
+					},
+										{
+						"image": "16.jpg",
+						"tags": "world inspiring political ",
+						"subhead": "Sarah al Haider",
+						"title": "To drive with a woman in Saudi Arabia",
+						"date": "15/1/2012"
+					},
+					{
+						"image": "17.jpg",
+						"tags": "world crime ",
+						"subhead": "Tom Latchem, the newspaper's ex-TV editor",
+						"title": "To lose your job at News of the World",
+						"date": "20/2/2011"
+					},
+					{
+						"image": "17.jpg",
+						"tags": "world crime ",
+						"subhead": "Tom Latchem, the newspaper's ex-TV editor",
+						"title": "To lose your job at News of the World for a scandal",
+						"date": "2/1/2011"
+					},
+					{
+						"image": "18.jpg",
+						"tags": "world tragedy ",
+						"subhead": "Kevin McCort, CEO of aid agency CARE Canada",
+						"title": "To eat a full meal in the midst of famine",
+						"category": "february",
+						"date": "22/2/2011"
+					},
+					{
+						"image": "19.jpg",
+						"tags": "world inspiring ",
+						"subhead": "Ivan Garcia Pena, restaurant owner",
+						"title": "To open your own business in Cuba",
+						"date": "25/2/2011"
+					},
+					{
+						"image": "19.jpg",
+						"tags": "world inspiring ",
+						"subhead": "Ivan Garcia Pena, restaurant owner",
+						"title": "To open your own business in Cuba",
+						"date": "25/2/2011"
+					},
+					{
+						"image": "19.jpg",
+						"tags": "world inspiring ",
+						"subhead": "Ivan Garcia Pena, restaurant owner",
+						"title": "To open your own business in Cuba",
+						"date": "25/4/2012"
+					}
+				]
+}
+		var face = tiles.faces;
+		var tags = [];
+		var years = [];
+	
+		// Create an array storing the date object and index for each entry
+		var dateArr = [];
+			$.each(tiles.faces, function(i, tile){
+				var foundDate = tile.date.split('/');
+				if(foundDate[2] != undefined){
+					// This has three dates separated by slashes and should become a valid date object
+					var dateObj = new Date(foundDate[2], foundDate[1] - 1, foundDate[0]);
+					dateArr[i] = {date: dateObj, index: i, type: 'dmy'};
+				} else if(foundDate[1] != undefined) {
+					// This has two dates, should be stored as string
+					//dateArr[i] = {date: tile.date, index: i, type: 'my' };
+					var dateObj = new Date(foundDate[1] - 1, foundDate[0]);
+					dateArr[i] = {date: dateObj, index: i, type: 'my'};
+				} else {
+					// This has one date and should be stored as a string
+					var dateObj = new Date(foundDate[0]);
+					dateArr[i] = {date: dateObj, index: i, type: 'd'};
+					//dateArr[i] = {date: tile.date, index: i, type: 'd' };
+				}
+		});
+		
+		// Sort the array by date
+		function sortByDate(a,b){
+			var aDate = a.date;
+			var bDate = b.date;
+			return ((aDate < bDate) ? -1 : ((aDate > bDate) ? 1 : 0 ));
+		}
+		dateArr.sort(sortByDate);
+		
+		// Create an array with each month, important for returning month name later
+		var month = new Array(12);
+		month[0]="january";
+		month[1]="february";
+		month[2]="march";
+		month[3]="april";
+		month[4]="may";
+		month[5]="june";
+		month[6]="july";
+		month[7]="august";
+		month[8]="september";
+		month[9]="october";
+		month[10]="november";
+		month[11]="december";
+		
+		// Create an array of colours to use for each new date
+		colourArr = new Array('#D50202', '#FF6B00', '#00FFFF', '#FA5443', '#0099CC', '#B82EFF', '#2FE5A5', '#D50202', '#13B7C6', '#84999A', '#FF6B00');
+		
+		// Create each tile by going through an array of all dates, already sorted, and using the corresponding index to pull from the JSON
+		$.each(dateArr, function(i){
+			var j = dateArr[i].index;
+			var tile = "<div id=\"id-" + i + "\" class=\"head ";
+			tile += face[j].tags + ' ' + findMonth(dateArr[i].date, dateArr[i].type) + ' ' + findYear(dateArr[i].date, dateArr[i].type);
+			tile += "\">";
+			tile += "<div class=\"day-label\">" + "</div>";
+			tile += "<div class=\"face\">";
+			tile += "<div class=\"brow\">";
+			tile += face[j].title;
+			tile += "<br /><span class=\"more-details\">";
+			tile += ' ' + findDate(dateArr[i].date, dateArr[i].type);
+			tile += "</span></div>";
+			tile += "<img src=\"images/" + face[j].image + "\" />";
+			tile += "</div>"; // .face
+			tile += "</div>"; // .head
+			$("#facewall").append(tile);
+			//findDate();
+			//Also add to array of themes
+					var faceTags = face[j].tags.split(' ');
+					$.each(faceTags, function(k, faceTag){
+						if(jQuery.inArray(faceTag, tags) == -1 && faceTag != ' ' && faceTag != ''){
+							tags.push(faceTag);
+						}
+					})
+			// Also add it to the timeline in the text overlay
+			textTimeline(face[j], j, findDateNoObj(face[j].date));
+			// Also add it to an array of all available years
+			var theYear = findYear(dateArr[i].date, dateArr[i].type);
+				if(jQuery.inArray(theYear, years) == -1){
+					years.push(findYear(dateArr[i].date, dateArr[i].type));
+				}
+		
+		})
+		// Sort the array of years in order
+		years.sort();
+	
+
+		//createQuicknav();
+		function createQuicknav(){
+			var navpointWidth = $('#quicknav').width()/365;
+			for(i = 0; i < 365; i++){
+				$('#quicknav').append('<div class="navpoint"><a style="width:' + navpointWidth + 'px" href=""></a></div>');
+			}
+		}
+
+		function textTimeline(face, i, date){
+		// Also add it to the timeline in the text overlay
+			var text = '<div id="timeline-' + i + '" ';
+			text += 'class="timeline ';
+			text += face.tags;
+			text += '"><span class="timeline-date">' + date + '</span><br /><a href="#' + i + '">' + face.title + '</a></div>';
+			$('#text-timeline #timeline-container').append(text);
+		}
+		// First apply the "all" tag, then all the others
+		$.each(tags, function(i, tag){
+			$('#header #tags #custom-tags').append('<div class="tag"><a href="#">' + tag + '</a></div>');
+		})
+		
+		function overlayText(id){
+			var face = tiles.faces[id];
+			var text = '';
+			text += "<div><img src=\"images/" + face.image + "\" /></div>"
+			text += "<h3>" + findDateNoObj(face.date) + "</h3>";
+			text += "<h2>" + face.title + "</h2>";
+			text += "<div class=\"tiletext\">" + face.text + "</div>";
+			return text;
+		}
+
+		function findMonth(date, type){
+			if(type == 'dmy' || type == 'my'){
+				return month[date.getMonth()]
+			}
+		}
+		function findYear(date, type){
+			return date.getUTCFullYear();
+		}
+		function findDay(date, type){
+			if(type == 'dmy'){
+				return date.getDate();
+			}
+		}
+
+		function findDate(date, type){
+			var month = findMonth(date, type);
+			var day = findDay(date, type);
+			var year = findYear(date, type);
+			var string = '';
+			if(month != undefined){
+				string += month + ' ';
+			}
+			if (day != undefined){
+				string += day + ', ';
+			}
+			if (year != undefined){
+				string += year;
+			}
+			return string;	
+		}
+		function findDateNoObj(date, type){
+			var foundDate = date.split('/');
+				if(foundDate[2] != undefined){
+					// This has three dates separated by slashes and should become a full date object
+					var dateObj = new Date(foundDate[2], foundDate[1] - 1, foundDate[0]);
+					foundDate = {date: dateObj, type: 'dmy'};
+				} else if(foundDate[1] != undefined) {
+					// This has two dates
+					var dateObj = new Date(foundDate[1] - 1, foundDate[0]);
+					foundDate = {date: dateObj, type: 'my'};
+				} else {
+					// This has one date
+					var dateObj = new Date(foundDate[0]);
+					foundDate = {date: dateObj, type: 'd'};
+				}
+			var month = findMonth(foundDate.date, foundDate.type);
+			var day = findDay(foundDate.date, foundDate.type);
+			var year = findYear(foundDate.date, foundDate.type);
+			var string = '';
+			if(month != undefined){
+				string += month + ' ';
+			}
+			if (day != undefined){
+				string += day + ', ';
+			}
+			if (year != undefined){
+				string += year;
+			}
+			return string;	
+		}
+		function processDate(i){
+			var date = tiles.faces[i].date.split('/');
+			var month = findMonth(i)
+			return date[0];
+		}
+		
+/* ------------- More Layout --------------- */
+		function applyDates(){
+			$(".year-label").remove();
+			$(".month-label").remove();
+			jQuery.each(years, function(i, year){
+				if(years.length > 1){
+				$("." + year).filter(":visible:first").find('.day-label').append('<span class="year-label"> ' + year + '</span>');
+				}
+				jQuery.each(month, function(i, month){
+					$('.'+month+'.'+year+' .day-label').filter(':visible:first').prepend('<span class="month-label">' + month + '</span> ');
+				})
+			})
+		}
+		applyDates();
+		
+		//applyBrows();
+		function applyBrows(){
+			$(".face").prepend("<div class=\"brow\">Person of interest</div>");
+		}
+		//applyMarkers();
+		function applyMarkers(){
+			$(".head").append("<div class=\"freckle\"></div>");
+		}
+	//	makeOverlay();
+		function makeOverlay(){
+			var width = $(window).width();
+			var height = $(window).height();
+			$('#overlay').css({"width":width,"height":height});
+		}
+/* -------------- User interaction -------------- */
+		// Filter categories
+		$('#tags .tag a').click(function(){
+			var show = $(this).text();
+			$('#facewall > div').hide();
+			$('#timeline-container .timeline').hide();
+			$('#timeline-container').css({'marginTop':0});
+			if($('#text').is(':visible')) { hideOverlay(); }
+			$('#tags .selected').removeClass('selected');
+			if(show == 'all'){
+				$('#facewall > div').show();
+				$('#timeline-container > div').show();
+			} else {
+				$('#facewall .' + show).show();
+				$('#timeline-container .' + show).show();
+			}
+			$(this).addClass('selected');
+			applyDates();
+			return false;
+		})
+		$('#views .tag a').click(function(){
+			var show = $(this).text();
+			//TO DO: figure out a way to sort by topics...
+		})
+		
+		// Animate individual tiles
+		$('.head').hover(function(){
+			$(this).find('img').stop().animate({"marginTop":"0px","opacity":".8"}, 250);
+		}, function(){
+			$(this).find('img').stop().animate({"marginTop":"-22px","opacity":"1"}, 250);
+		});
+		
+		// Activate overlay
+		$('.face').click(function(){
+			id = $(this).parent().attr('id');
+			showOverlay(id);
+		})
+		$('.timeline').click(function(){
+			id = $(this).attr('id');
+			//get id and remove dash
+			id = id.split('-');
+			id = id[1];
+			manageTimeline(id);
+		})
+		// Disable overlay
+		$("#x").click(function(){
+			hideOverlay();
+		})
+		function hideOverlay(){
+			$("#text-content").text('')
+			$("#text").hide();
+			$("#facewall").show();
+		}
+		function showOverlay(id){
+			//get id and remove dash
+			id = id.split('-');
+			id = id[1];
+			$("#text").show();
+			manageTimeline(id);
+			$("#facewall").hide();
+		}
+		function manageTimeline(id) {
+			if($('#' + id).hasClass('selected')){} else {
+		/*		
+				id = id.split('-');
+				id = id[1];
+		*/
+				// Clear then add the document text
+				$("#text-content").text('');
+				$("#text-content").append(overlayText(id));
+				
+				$('#text-timeline .selected').animate({'opacity':'.5'}).removeClass('selected');
+				var legendEq = $('#timeline-container #timeline-' + id).index();
+				$('#text-timeline #timeline-' + id).addClass('selected').animate({'opacity':'1'});
+				var offset = 0;
+				for(i=0;i < legendEq;i++){
+					offset += $('#text-timeline .timeline').eq(i).height();
+					offset += 32;
+				}
+				if(($('#timeline-container #timeline-' + id).index()) > 0) {
+					if($('#text-timeline .timeline').eq(legendEq - 1).is(":visible")){
+						thisOffset = $('#text-timeline .timeline').eq(legendEq - 1).height();
+						thisOffset = thisOffset + 32;
+					}
+				} else {
+					thisOffset = 0;
+				}
+				$('#timeline-container').stop().animate({'marginTop':-(offset - thisOffset)});
+				var selected = $('#timeline-' + id);
+			}
+		}
+		
+			});
+		</script>
+		<style type="text/css">
+		html, body{
+			padding:0;
+			margin:0;
+		}
+			body{ font: 70% "PrattRegular";}
+			a{
+				text-decoration:none;
+				color:#FF0000;
+			}
+			a:hover{
+				text-decoration:underline;
+			}
+			#container{
+				width:100%;
+				margin:0 auto;
+			}
+			#content{
+				float:left;
+				position:relative;
+			}
+			#header{
+				margin:20px 0;
+				padding:0 0 20px 0;
+				float:left;
+				width:100%;
+				border-bottom:1px solid #b1b1b1;
+			}
+			#header #tags{
+				width:79%;
+				float:left;
+			}
+			#header .tag a{
+				float:left;
+				padding:8px 8px;
+				margin-bottom:3px;
+				background-color:#b4b4b4;
+				color:white;
+				font-weight:bold;
+				font-size:13px;
+				margin-right:3px;
+				display:block-inline;
+				text-transform: capitalize;
+			}
+				#header .selected{
+					background-color:#D50202 !important;
+				}
+				#header .tag-label{
+					color:#333;
+					font-weight:bold;
+					font-size:13px;
+					display:block-inline;
+					text-transform: capitalize;
+					clear:both;
+					margin:0 0 5px 0;
+				}
+			#header #views{
+
+				float:left;
+				margin-left:25px;
+			}
+			#quicknav{
+				width:100%;
+				float:left;
+			}
+				#quicknav .navpoint a{
+					float:left;
+					height:100%;
+					display:block;
+					height:20px;
+					background-color:#ececec;
+				}
+				#quicknav .navpoint a:hover{
+					background-color:#D50202 !important;
+				}
+			#facewall{
+				position:relative;
+				width:100%
+				float:left;
+			}
+			.head{
+				float: left;
+				height: 200px;
+				position: relative;
+				width: 306px;
+				border-top: 7px solid;
+				margin-top:37px;
+			}
+			.face{
+				float: left;
+				height: 180px;
+				margin-right: 1px;
+				overflow: hidden;
+				position: relative;
+				width: 302px;
+				z-index: 10;
+				cursor:pointer;
+			}
+				.face img{
+					display: block;
+					float: left;
+					left: 0;
+					margin-top: -22px;
+					position: relative;
+					z-index: 1;
+				}
+			.freckle{
+				background-color: #D50202;
+				height: 80px;
+				margin: -1px 0 0 0;
+				position: relative;
+				width: 7px;
+				z-index: 1;
+			}
+			.brow{
+				background: none repeat scroll 0 0 white;
+				color: #333333;
+				float: left;
+				font-family: 'PrattHeavy',Georgia,'Times New Roman',serif;
+				font-size: 14px;
+				line-height: 1.5;
+				margin: 5px 0;
+				padding:0 5px;
+				overflow: hidden;
+				position: relative;
+				width: 275px;
+				z-index: 0;
+			}
+				.more-details{
+					font-family: 'PrattRegular',Georgia,'Times New Roman',serif;
+					font-size:14px;
+					color:#333;
+					text-transform:capitalize;
+					height:15px;
+				}
+			.day-label{
+					float: left;
+					font-family: 'PrattRegular',Georgia,'Times New Roman',serif;
+					font-size: 32px;
+					font-weight: bold;
+					letter-spacing: -2px;
+					text-transform: capitalize;
+					width: 100%;
+					margin: -40px 0 -20px 0;
+					color:#a6a6a6;
+			}
+				.month-label{
+					color:black !important;
+					font-family: 'PrattHeavy',Georgia,'Times New Roman',serif;
+				}
+				.clear{
+					clear:both;
+				}
+				/*
+			.january{
+				border-color: #D50202;
+			}
+				.january .freckle, .nav-january{
+					background-color: #D50202;
+				}
+			.february{
+				border-color: #D50202, #FF6B00;
+			}
+				.february .freckle, .nav-february{
+					background-color: #FF6B00;
+				}
+			.march{
+				border-color: #D50202, #FF6B00, #00FFFF;
+			}
+				.march .freckle, .nav-march{
+					background-color: #00FFFF;
+				}
+			.april{
+				border-color: #D50202, #FF6B00, #00FFFF, #FA5443;
+			}
+				.april .freckle, .nav-april{
+					background-color: #FA5443;
+				}
+			.may{
+				border-color: #D50202, #FF6B00, #00FFFF, #FA5443, #0099CC;
+			}
+				.may .freckle, .nav-may{
+					background-color: #0099CC;
+				}
+			.june{
+				border-color: #D50202, #FF6B00, #00FFFF, #FA5443, #0099CC, #B82EFF;
+			}
+				.june .freckle, .nav-june{
+					background-color: #B82EFF;
+				}
+			.july{
+				border-color: #D50202, #FF6B00, #00FFFF, #FA5443, #0099CC, #B82EFF, #2FE5A5;
+			}
+				.july .freckle, .nav-july{
+					background-color: #2FE5A5;
+				}
+			.august{
+				border-color:  #D50202, #FF6B00, #00FFFF, #FA5443, #0099CC, #B82EFF, #2FE5A5, #D50202;
+			}
+				.august .freckle, .nav-august{
+					background-color: #D50202;
+				}
+			.september{
+				border-color: #D50202, #FF6B00, #00FFFF, #FA5443, #0099CC, #B82EFF, #2FE5A5, #D50202, #13B7C6;
+			}
+				.september .freckle, .nav-september{
+					background-color: #13B7C6;
+				}
+			.october{
+				border-color: #D50202, #FF6B00, #00FFFF, #FA5443, #0099CC, #B82EFF, #2FE5A5, #D50202, #13B7C6, #84999A;
+			}
+				.october .freckle, .nav-october{
+					background-color: #84999A;
+				}
+			.november{
+				border-color: #D50202, #FF6B00, #00FFFF, #FA5443, #0099CC, #B82EFF, #2FE5A5, #D50202, #13B7C6, #84999A, #FF6B00;
+			}
+				.november .freckle, .nav-november{
+					background-color: #FF6B00;
+				}
+			.december{
+				border-color: ;
+			}
+				.december .freckle, .nav-december{
+					background-color: #D50202;
+				}
+				*/
+		#overlay{
+			width:100%;
+			height:100%;
+			top:0;
+			left:0;
+			z-index:99990;
+			display:none;
+			background-color:white;
+		}
+		#text-container{
+			width:100%;
+		}
+			#text-content h3{
+				margin:0;
+				text-transform:uppercase;
+				font-size:12px;
+				color:#FF0000;
+				font-family: 'PrattRegular',Georgia,'Times New Roman',serif;
+			}
+		#text{
+			margin: 0 auto;
+			position:relative;
+			background-color:white;
+			padding:20px;
+			z-index:99994;
+			display:none;
+			float:left;
+		}
+		#legend{
+			border-right: 1px solid #ECECEC;
+			float: left;
+			margin-right: 22px;
+			width: 220px;
+		}
+			#x{
+				background-color: #EEEEEE;
+				float: left;
+				font-family: 'PrattHeavy',Georgia,'Times New Roman',serif;
+				font-size: 14px;
+				height: 20px;
+				line-height: 1.3;
+				margin-bottom: 20px;
+				margin-left: -8px;
+				margin-right: 20px;
+				padding: 5px 40px 5px 5px;
+				position: relative;
+				width: 161px;
+			}
+				#x-a{
+					background-color: white;
+					background-image: url("images/leftarrow.png");
+					background-position: 0 50%;
+					background-repeat: no-repeat;
+					float: left;
+					height: 30px;
+					margin: -5px 10px 0 -5px;
+					width: 9px;
+				}
+			#text h2{
+				font-family: 'PrattRegular',Georgia,'Times New Roman',serif;
+				font-size:32px;
+				margin:0 0 5px 0;
+				line-height:1.2;
+			}
+			#text-content{
+				font-family: arial !important;
+				font-size: 14px !important;
+				line-height: 1.5;
+				z-index:99995;
+				float:left;
+				width:600px;
+			}
+				#text-content div{
+					float:left;
+					padding:0 20px 20px 0;
+				}
+				.tile-text{
+					clear:both;
+				}
+			#text-timeline{
+				width:240px;
+				float:left;
+				height:305px;
+				overflow:hidden;
+				position:relative;
+			}
+				#text-timeline .timeline{
+					font-size:14px;
+					margin:0px 3px 0px 3px;
+					opacity:0.5;
+					border-left:4px solid #d8d8d8;
+					border-top:1px solid #ececec;
+					border-bottom:1px solid #ececec;
+					padding:15px 0 15px 10px;
+					width:180px;
+					display:block;
+					height: auto;
+				}
+				#text-timeline .selected{
+				}
+				.timeline-date{
+					text-transform:uppercase;
+					font-size:10px;
+					color:#606060;
+					font-family:Helvetica, Arial, sans-serif !important;
+					font-weight:bold;
+					margin-bottom:3px;
+				}
+		</style>	
+	</head>
+	<body>
+	<div id="container">
+		<h1>Timeline Wall Template</h1>
+		<div id="header">
+			<div id="tags">
+
+				<div class="tag-label">View by:</div>
+				<div class="tag"><a href="#" class="selected">all</a></div>
+				<div id="custom-tags"></div>
+			</div>
+			<!--<div id="views">
+				<div class="tag-label">Sort by:</div>
+				<div class="tag"><a href="#" class="selected">months</a></div>
+			-->
+				<!--<div class="tag"><a href="#">tags</a></div>-->
+			<!--</div>-->
+			<div id="quicknav">
+
+			</div>
+		</div>
+		<div id="content">
+			<div id="facewall"></div>
+				<div id="text">
+						<div id="legend">
+							<div id="x"><div id="x-a"></div><a href="#">Back to the timeline</a></div>
+							<div id="text-timeline">
+								<div id="timeline-container"></div>
+							</div>
+						</div>
+						<span id="text-content"></span>
+				</div>
+		</div>
+
+	</div>
+
+	</body>
+</html>
+
+

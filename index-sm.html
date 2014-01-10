@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* ----------- Global CSS ----------- */
+body, html{
+	margin:0;
+	padding:0;
+	width:620px;
+}
+.clearfloat{
+	clear:both;
+}
+a{
+	text-decoration:none;
+	color:#FF0000;
+}
+a:hover{
+	text-decoration:underline;
+}
+/* ----------- Google Map ----------- */
+#map_canvas{
+	width:670px;
+	height:100%;
+	float:left;
+}
+#map-container{
+	font-family:Arial, Helvetica, Tahoma, sans-serif;
+	font-size:12px;
+	width:920px;
+	height:520px;
+}
+
+/* ----------- Player Controls ----------- */
+#pause{
+	display:none;
+}
+.hashmark{
+    float: right;
+    height: 14px;
+    margin-top: 20px;
+    position: relative;
+	font-size: 10px;
+	text-align:center;
+}
+#hashmarks{
+    float: left;
+    margin: 0 auto 0 25px;
+    width: 800px;
+}
+#title-holder{
+	   text-align:center;
+	   font-family:helvetica, arial, sans-serif;
+	   color:Gray;
+	   font-size:12px;
+	   width:100%;
+	   clear:both;
+	   margin:15px 0;
+}
+#slider{
+	margin:0 auto;
+	background-image:url('images/slider-bg.png');
+    height: 12px;
+    position: relative;
+    width: 920px;
+    z-index: 0;
+	background-position: 99.9% 50%;
+}
+#slider{
+	width:600px;
+	position: relative;
+}
+	#slideMe{
+		border:1px solid black;
+		padding:10px;
+		position: absolute;
+	}
+/* ----------- Header ----------- */
+#map-header{
+	font-family: 'PrattHeavy',Georgia,'Times New Roman',serif;
+	width:100%;
+	float:left;
+}
+#tab-container{
+	float:left;
+	width:720px;
+}
+.tab{
+    border-right: 1px solid #ECECEC;
+    float: left;
+    height:70px;
+}
+    .tab-first{
+        border-left: 1px solid #ECECEC;
+    }
+	.tab a{
+		height: 60px;
+		display: block;
+		line-height: 3.5;
+		text-align: center;
+		width: 150px;
+		color:#333333;
+		font-size:14px;
+            border-top: 3px solid #ECECEC;
+
+	}
+        .tab a:hover{
+            text-decoration:none;
+        }
+    .tab-sub{
+        width:100%;
+        text-align:center;
+        color:#a8a8a8;
+        margin-top:-26px;
+        font-size:11px;
+    }
+    .tab a.selected{
+        border-top:3px solid #FF0000;
+    }
+    .tab-drawtools{
+        width:150px;
+        overflow:hidden;
+    }
+    #drawtools-container{
+        width:450px;
+    }
+    #drawtools{
+        width:150px;
+        float:left;
+    }
+    #drawtools-extend{
+        float: left;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        height: 60px;
+        margin-top: 17px;
+        width: 283px;
+    }
+/* ----------- Legend ----------- */
+#legend-container{
+    border-top: 1px solid #ECECEC;
+    color: #333333;
+    float: left;
+    height: 100%;
+    padding: 0 10px;
+    width: 230px;
+    z-index: 10;
+}
+#legend, #legend-user{
+    padding:10px;
+}
+.legend-label{
+    color: #EEEEEE;
+}
+#legend li, #legend ul{
+    color: #CCCCCC;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-top: 3px;
+    padding-left: 10px;
+}
+#legend a{
+    color:#333;
+    text-decoration:none;
+}
+    #legend a:hover{
+        text-decoration:underline;
+    }
+.legend-sm{
+	margin:20px 0 20px 0;
+	padding:0;
+	float:left;
+}
+.legend-sm li{
+	float:left;
+	list-style-type:none;
+	margin-right:15px;
+}
+.legend-sm li:first-child{
+		font-family:"PrattHeavy", Arial, Helvetica, sans-serif;
+}
+/* -- Legend > Filters -- */
+#legend-container h2, #legend-container h3{
+    margin:10px 0 5px 0;
+    font-family:'PrattRegular', sans-serif;
+}
+.filter-box{
+    float:left;
+    width:100%;
+    border-bottom:1px solid #ececec;
+    padding:0 0 10px 0;
+}
+hr{
+    border-color:#ececec;
+    background:none;
+}
+#filter-injury ul{
+    margin:0;
+    padding:0;
+}
+#filter-injury li{
+    margin: 0 3x;
+    padding:0 0 0 10px;
+    list-style-type:none;
+}
+#filter-injury li.selected{
+    background-image:url('arrow.png');
+    background-repeat:no-repeat;
+    background-position:0px 4px;
+}
+    #filter-zoom{
+        float:left;
+    }
+    #filter-zoom input{
+        width: 178px;
+        float:left;
+        margin-top:3px;
+    }
+        #filter-zoom small{
+            clear:both;
+            display:block;
+        }
+        .zoom{
+            background-image: url("zoom.png");
+            background-position: 3px 4px;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            float: left;
+            height: 15px;
+            margin: 3px 1px 1px;
+            padding: 2px;
+            width: 15px;
+        }
+        
+.filter-tip{
+    text-align:center;
+    margin-bottom: 9px;
+}
+/* -- Legend > User -- */
+#legend-user{
+    display:none;
+    float:left;
+    width:230px
+}
+#success-message{
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 150px;
+	color:green;
+	font-family:"PrattRegular", Arial, Helvetica, sans-serif;
+}
+/* --- User Form -- */
+table{
+    width:217px;
+}
+textarea{
+    width: 100%;
+    height: 110px;}
+}
+.user-label{
+    font-family:"PrattHeavy", Arial, Helvetica, sans-serif;
+}
+.inner-user-form{
+    width:214px;
+	position:relative;
+}
+
+</style>
+
+<script type="text/javascript" src="markerclusterer.js"></script>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
+<script type="text/javascript" src="http://beta.images.theglobeandmail.com/archive/01327/jquery-1_6_4_min_1327995a.js"></script>
+<script type="text/javascript" src="jquery-ui-1.8.16.custom.min.js"></script>
+<link rel="stylesheet" type="text/css" href="jquery-ui-1.8.16.custom.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="http://beta.images.theglobeandmail.com/bundle/2006392680/css/fonts.css" />
+<!-- Import the visualization javascript -->
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+<!-- Initialize visualization -->
+<script type="text/javascript">
+  google.load('visualization', '1', {});
+</script>
+
+<script type="text/javascript">
+// Define variables
+var map;
+var layer;
+var tableid = 2549680;
+
+// On load
+function initialize() {
+// Create map
+  map = new google.maps.Map(document.getElementById('map_canvas'), {
+	center: new google.maps.LatLng(43.704615274467294, -79.38858032226562),
+	zoom: 11,
+	panControl: false,
+	zoomControl: false,
+	scaleControl: false,
+	streetViewControl: false,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+var styles = [
+    [{
+        where: "INJURY = 'None'",
+        markerOptions: {
+            iconName: "small_red"
+        }
+    }, {
+        where: "INJURY = 'Minimal'",
+        markerOptions: {
+            iconName: "small_blue"
+        }
+    }, {
+        where: "INJURY = 'Minor'",
+        markerOptions: {
+            iconName: "small_purple"
+        }
+    }, {
+        where: "INJURY = 'Major'",
+        markerOptions: {
+            iconName: "small_yellow"
+        }
+    }, {
+        where: "INJURY = 'Fatal'",
+        markerOptions: {
+            iconName: "small_red"
+        }
+    }, {
+        where: "INJURY = 'None'",
+        markerOptions: {
+            iconName: "measle_grey"
+        }
+    }
+    ]
+];
+
+// Create base layer from Fusion Tables
+  layer = new google.maps.FusionTablesLayer(tableid);
+  layer.setMap(map);
+
+// Create MarkerCluster
+var mc = new MarkerClusterer(map);
+
+// Create layer from User Data
+user_layer = new google.maps.FusionTablesLayer({ query: {
+    select:'lat',
+    from: 2722866,
+    where: 'approved = 1'
+    }
+  });
+
+layer.setOptions({
+    'styles':styles
+})
+
+/* ---------- Queries ------------ */
+// associative array schema: [column, value1, value2];
+    var ageMin = 0,
+        ageMax = 99;
+    var yearMin = 1985,
+        yearMax = 2010;
+    var timeMin = 0,
+        timeMax = 2400;
+        /*
+         {
+        column: "INJURY",
+        value: '*',
+    },
+        */
+var columnConstant = [{
+        column: "AGE OF CYCLIST",
+        value: ageMin,
+        value2: ageMax
+    }, {
+        column: "YEAR",
+        value: yearMin,
+        value2: yearMax
+    }, {
+        column: "ACC TIME",
+        value: timeMin,
+        value2: timeMax
+    }
+    ];
+//var valueConstant = [];
+//Controls all the filters
+var injuryQuery = "";
+var filterQuery = '';
+function filter(column, value, value2){
+    if(column == 'reset' || column == 'All' || value == 'All' || value == 'reset'){
+        // set the desired column to show all
+        injuryQuery = '';
+    } else if (value2 != undefined) {
+    filterQuery = '';
+    // This is a range
+    var pushVar = {column: column, value: value, value2: value2};
+    if(column == 'INJURY'){
+        columnConstant[injury] = pushVar;
+    } else if(column == 'AGE OF CYCLIST') {
+        columnConstant[0] = pushVar;
+    } else if(column == 'YEAR') {
+        columnConstant[1] = pushVar;
+    } else if(column == 'ACC TIME') {
+        columnConstant[2] = pushVar;
+    }
+        // Create query by iterating through column array and adding values
+        $.each(columnConstant, function(index, arrayvalue){
+            if(index != 0 && index < (columnConstant.length)){
+                filterQuery += " and ";
+            }
+            filterQuery += "'" + arrayvalue.column +"' >= '" + arrayvalue.value + "' and '" + arrayvalue.column + "' <= '" + arrayvalue.value2 + "'";
+        });
+//        console.log(filterQuery);
+    } else {
+    // this is the injury only
+    injuryQuery = "'" + column + "' = '" + value + "'";
+    }
+    var query = "select 'LAT' from " + tableid + " where ";
+    query += filterQuery;
+    if(filterQuery != '' && injuryQuery != '') {
+        query += ' and ';
+    }
+    query += injuryQuery;
+    layer.setQuery(query);
+}
+/* ---------- Query Controls / Filters ---------- */
+
+// Age Filter
+makeAgeSlider();
+function makeAgeSlider(){
+	// Create the scrubber
+	$('#age-slider').slider({
+            min: ageMin,
+			max: ageMax,
+			range:true,
+            values: [ageMin, ageMax],
+			animate: false,
+    			slide: function( event, ui ) {
+                    if(ui.values[0] == ageMin && ui.values[1] == ageMax ){
+                        $('#filter-age-tip').text('All');
+                    } else {
+                        $('#filter-age-tip').text(ui.values[0] + " to " + ui.values[1]);
+                    }
+                    filter('AGE OF CYCLIST', ui.values[0], ui.values[1]);
+                }
+        });
+}
+
+// Year Filter
+makeYearSlider();
+function makeYearSlider(){
+	// Create the scrubber
+	$('#year-slider').slider({
+            min: yearMin,
+			max: yearMax,
+            range:true,
+			values: [yearMin, yearMax],
+			animate: false,
+    			slide: function( event, ui ) {
+                    if(ui.values[0] == yearMin && ui.values[1] == yearMax ){
+                        $('#filter-year-tip').text('All');
+                    } else {
+                        $('#filter-year-tip').text(ui.values[0] + " to " + ui.values[1]);
+                    }
+                    filter('YEAR', ui.values[0], ui.values[1]);
+                }
+        })
+}
+
+// Time of day filter
+//makeTimeSlider();
+function makeTimeSlider(){
+	// Create the scrubber
+	$('#time-slider').slider({
+            min: 0,
+            max: 1440,
+			values: [0, 1440],
+			animate: false,
+            range: true,
+    			slide: function( event, ui ) {
+                    var intoHours = [(ui.values[0] / 60 * 100).toFixed(0), (ui.values[1] / 60 * 100).toFixed(0)];
+                    if(intoHours == timeMin && intoHours == timeMax){
+                        $('#filter-time-tip').text('All');
+                    } else {
+                        $('#filter-time-tip').text(intoHours[0] + " to " + intoHours[1]);
+                    }
+                        filter('ACC TIME', intoHours[0], intoHours[1]);
+                }
+        });
+}
+
+// Injury filter
+$('#filter-injury a').click(function(){
+    var thisFilter = $(this).text();
+    filter('INJURY', thisFilter);
+    $('#filter-injury li').removeClass('selected');
+    $(this).parent().addClass('selected');
+    return false;
+})
+
+$('#filter-injury input').click(function(){
+    var thisInput = $(this);
+	if(thisInput.is(':checked')) { 
+        var thisFilter = $(this).val();
+//        console.log(thisFilter);
+        filter('INJURY', thisFilter);
+	} else { 
+	    var thisFilter = $(this).val();
+        filter('INJURY', thisFilter);
+	}
+})
+
+var toggle = new Array('1986','1987','1988','1989','1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010');
+
+// Zoom to your area
+$('.zoom').click(function(){
+    zoom($(this));
+});
+$('#filter-zoom').bind('keyup', function(e){
+    var key = e.keyCode || e.which;
+    if(key === 13){
+        zoom($(this));
+    }
+})
+
+function zoom(thisZoom){
+  var address = thisZoom.parent().find('input').val();
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode( { 'address': address}, function(results, status){
+    if(status == 'OK'){
+        map.setCenter(results[0].geometry.location);
+        map.setZoom(16);
+    }
+   });
+}
+
+/* ----------- Drawing Tools ------------ */
+$('#mapview').click(function(){
+    mapView();
+    $('.selected').removeClass('selected');
+    $(this).addClass('selected');
+	console.log('what ' + lastMarker);
+    if(lastMarker != undefined) lastMarker.setMap(null);
+    return false;
+})
+$('#drawtools a').click(function(){
+	if(!($(this).hasClass('selected'))){
+        drawTools();
+        $('.selected').removeClass('selected');
+        $(this).addClass('selected');
+        $('#legend').hide();
+        $('#legend-user').show();
+    }
+    return false;
+})
+function mapView(){
+    if(drawingManager){
+        drawingManager.setMap(null);
+        drawing = false;
+        user_layer.setMap(null);
+        $('.tab-drawtools').removeClass('open').animate({'width':'150px'});
+        $('#drawtools a').removeClass('selected');
+        $('#legend').show();
+        $('#legend-user').hide();
+        layer.setMap(map);
+    }
+}
+var drawingManager, drawing = false, lastMarker;
+//var content = $('.user-form').html();
+function drawTools(){
+    layer.setMap(null);
+    user_layer.setMap(map);
+    if(!drawing){
+        drawing = true;
+        drawingManager = new google.maps.drawing.DrawingManager({
+        drawingMode: google.maps.drawing.OverlayType.MARKER,
+        drawingControl: true,
+        drawingControlOptions: {
+            position: google.maps.ControlPosition.TOP_LEFT,
+            drawingModes: [google.maps.drawing.OverlayType.MARKER]
+        }
+        });
+        drawingManager.setMap(map);
+            drawing = true;
+        
+        // Create infobox when new user marker created
+        var lastWindow;
+
+        google.maps.event.addListener(drawingManager, 'markercomplete', function(marker) {
+            if(lastMarker) lastMarker.setMap(null);
+            lastMarker = marker;
+            var latlon = marker.getPosition();
+           /* if(lastWindow) lastWindow.close(); //close the last window if it exists
+            lastWindow = new google.maps.InfoWindow( {
+                position: latlon,
+                size: new google.maps.Size(350,500),
+                content: "" + content + ""
+                });
+                lastWindow.open(map);
+           */
+		   $('form').submit(function() {
+				sendData(latlon, $(this).serializeArray());
+		   });
+        }); //markercomplete
+    }
+
+}
+$('form').submit(function() {
+	$("#success-message").text("Please place a marker on the map.");
+	return false;
+});
+// Send drawn form to user fusion table
+function sendData(latlon, formData){
+    $('#success-message').html('<img src="loading.gif" />');
+            // Send data to Fusion Tables on submit
+            // TO DO: Do this on ajax form submit instead of right away.
+            var string = String(latlon);
+            string = string.replace("(", "").replace(")", "")
+            var newlatlon = string.split(", ");
+            // lat=&lon=&desc=&safe=&road=&cras=&ageo=&acct=&traf=&roads=&year
+            var nUrl = "phptest.php?";
+            nUrl += "lat=" + newlatlon[0] + "&lon=" + newlatlon[1]; 
+      $.each(formData, function(i, formData){
+        nUrl += "&" + formData.name + "=" + formData.value;
+      });
+      $.get(nUrl, function(){
+        $('#success-message').text('Your marker is awaiting moderation.');
+      })
+}
+} // initialize()
+</script>
+</head>
+<body onLoad="initialize();">
+<div id="map-container">
+<div id="map_canvas"></div>
+<ul id="filter-injury" class="legend-sm">
+            <li>Toggle by injury:</li>
+			<li class="selected"><img src="small_all.png"> <a href="#">All</a></li>
+            <li><img src="small_green.png"> <a href="#">None</a></li>
+            <li><img src="small_blue.png"> <a href="#">Minimal</a></li>
+            <li><img src="small_purple.png"> <a href="#">Minor</a></li>
+            <li><img src="small_yellow.png"> <a href="#">Major</a></li>
+            <li><img src="small_red.png"> <a href="#">Fatal</a></li>
+            <li><img src="small_grey.png"> <a href="#">Unrecorded</a></li>
+        </ul>
+</html>
